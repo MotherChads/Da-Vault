@@ -1,0 +1,25 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerMovement : MonoBehaviour
+{
+
+    public float moveSpeed = 5f;  
+
+    public Rigidbody2D rb;   //Store a reference to the Rigidbody2D component required to use 2D physics. This is public, so a "rb2d" tab will appear in the inspector.
+
+    Vector2 movement;
+
+    void Update()
+    {
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
+    }
+
+    void FixedUpdate()
+    {
+            rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime); //Take note of "Time.fixedDeltaTime". This is what makes the movement so snappy. 
+            //This variable is the amount of time that has passed since the last time the function was called. The result of this is a constant movement speed
+    }
+}
